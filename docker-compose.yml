@@ -1,0 +1,25 @@
+version: "3.4"
+services:
+  kafka:
+    image: spotify/kafka
+    expose:
+      - 9092
+    networks:
+      - default
+  producer:
+    build:
+      context: producer/.
+    environment:
+      KAFKA: kafka:9092
+    networks:
+      - default
+  consumer:
+    build:
+      context: consumer/.
+    environment:
+      KAFKA: kafka:9092
+    networks:
+      - default
+networks:
+  default:
+    driver: bridge
