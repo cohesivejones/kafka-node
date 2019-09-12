@@ -9,6 +9,8 @@ services:
   producer:
     build:
       context: producer/.
+    depends_on:
+      - kafka
     environment:
       KAFKA: kafka:9092
     networks:
@@ -16,6 +18,8 @@ services:
   consumer:
     build:
       context: consumer/.
+    depends_on:
+      - kafka
     environment:
       KAFKA: kafka:9092
     networks:
